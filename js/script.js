@@ -32,5 +32,6 @@ can.onclick = function(e) {
   x = x - (stamp.width*scale/2);
   y = y - (stamp.height*scale/2);
   ctx.drawImage(stamp, x, y, stamp.width*scale, stamp.height*scale);
+
 };
 
