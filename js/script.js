@@ -17,7 +17,6 @@ img.onload = function(){
 img.src = 'http://images.plurk.com/b82bab63d060084b9e08da00ead9bfd5.jpg';
 
 can.onclick = function(e) {
-
   var x;
   var y;
   if (e.pageX || e.pageY) { 
@@ -33,8 +32,5 @@ can.onclick = function(e) {
   x = x - (stamp.width*scale/2);
   y = y - (stamp.height*scale/2);
   ctx.drawImage(stamp, x, y, stamp.width*scale, stamp.height*scale);
-  //ctx.translate(img.width-1, img.height-1);
-  //ctx.rotate(Math.PI);
-  //ctx.drawImage(img, 0, 0, img.width, img.height);
 };
 
