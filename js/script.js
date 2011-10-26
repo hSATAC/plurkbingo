@@ -2,9 +2,11 @@ var can = document.getElementById('canvas');
 var ctx = can.getContext('2d');
 var img = new Image();
 var stamp = new Image();
-stamp.src = 'http://cdn1.iconfinder.com/data/icons/nuvola2/48x48/actions/button_ok.png';
+stamp.src = 'images/button_ok.png';
 var main_width = 580;
 var scale = 1;
+var restorePoints = [];
+
 img.onload = function(){
   if(img.width > main_width) {
     scale = (main_width/img.width);
@@ -13,10 +15,12 @@ img.onload = function(){
   can.width = img.width*scale;
   can.height = img.height*scale;
   ctx.drawImage(img, 0, 0, img.width*scale, img.height*scale);
+  //saveRestorePoint();
 }
-img.src = 'http://images.plurk.com/b82bab63d060084b9e08da00ead9bfd5.jpg';
+img.src = 'bingo/88863e539ebf13f390205655b0a294ea.jpg';
 
 can.onclick = function(e) {
+  saveRestorePoint();
   var x;
   var y;
   if (e.pageX || e.pageY) { 
@@ -29,8 +33,29 @@ can.onclick = function(e) {
   } 
   x -= can.offsetLeft;
   y -= can.offsetTop;
-  x = x - (stamp.width*scale/2);
-  y = y - (stamp.height*scale/2);
-  ctx.drawImage(stamp, x, y, stamp.width*scale, stamp.height*scale);
+  x = x - (stamp.width/2);
+  y = y - (stamp.height/2);
+  ctx.drawImage(stamp, x, y, stamp.width, stamp.height);
 };
+$("#restore").click(function(e){
+  undoDrawOnCanvas();
+});
+$("#save").click(function(e){
+  var oImg = Canvas2Image.saveAsPNG(can, true);
+  oImg.id = "canvasimage";
+  oImg.style.border = can.style.border;
+  can.parentNode.replaceChild(oImg, can);
+});
+function saveRestorePoint() {
+	restorePoints.push(can.toDataURL("image/png"));
+}
 
+function undoDrawOnCanvas() {
+	if (restorePoints.length > 0) {
+		var oImg = new Image();
+		oImg.onload = function() {
+			ctx.drawImage(oImg, 0, 0);
+		}
+		oImg.src = restorePoints.pop();
+	}
+}

@@ -103,7 +103,25 @@
           </div>
           <div class="span4">
             <h3>Steps</h3>
-
+            <form class="form-stacked"> 
+            <div class="clearfix">
+              <label for="xlInput3">1.請輸入賓果圖片網址</label>
+              <div class="input">
+                <input class="span3" id="img_url" name="img_url" type="text">
+              </div>
+            </div>
+            <div class="clearfix">
+              <label>2.開始賓果</label>
+              <button type="button" id="restore" class="btn danger">復原</button>
+            </div>
+            <div class="clearfix">
+              <label>3.我做完了</label>
+              <button type="button" id="save" class="btn primary">轉為圖檔</button>
+            </div>
+            <div class="clearfix">
+              <label>4.右鍵另存圖片</label>
+            </div>
+            </form>
           </div>
         </div>
       </div>
@@ -118,6 +136,8 @@
 
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
+<script src="js/base64.js" type="text/javascript"></script>
+<script src="js/canvas2image.js" type="text/javascript"></script>
 <script src="js/script.js"></script>
   </body>
 </html>
