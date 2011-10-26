@@ -6,7 +6,7 @@ stamp.src = 'images/button_ok.png';
 var main_width = 580;
 var scale = 1;
 var restorePoints = [];
-var domain = 'http://www.hsatac.net/plurkbingo';
+var domain = 'http://bingo.hsatac.net/';
 var img_uploaded = '';
 $(function() {
   var img_url = QueryString.img;
@@ -85,14 +85,14 @@ $(function() {
 });
 function init() {
   var opts = {
-    lines: 12, // The number of lines to draw
-    length: 7, // The length of each line
-    width: 4, // The line thickness
-    radius: 10, // The radius of the inner circle
-    color: '#000', // #rgb or #rrggbb
-    speed: 1, // Rounds per second
-    trail: 60, // Afterglow percentage
-    shadow: false // Whether to render a shadow
+    lines: 12,
+    length: 7, 
+    width: 4, 
+    radius: 10, 
+    color: '#000',
+    speed: 1, 
+    trail: 60,
+    shadow: false
   };
   var target = document.getElementById('loading');
   var spinner = new Spinner(opts).spin(target);
@@ -106,9 +106,21 @@ function init() {
       can.width = img.width*scale;
       can.height = img.height*scale;
       ctx.drawImage(img, 0, 0, img.width*scale, img.height*scale);
-      $("#share_url").val(domain+"?img="+$("#img_url").val());
       spinner.stop();
       $(".alert-message").remove();
+
+    $.ajax({
+        url:"http://api.bit.ly/v3/shorten",
+        data:{longUrl:domain+"?img="+$('#img_url').val(),apiKey:'R_ce09d5cc110aaefec88fac016517b561',login:'hsatac'},
+        success:function(v) {
+          $("#share_url").val(v.data.url);
+        },
+        error: function(){
+          $("#share_url").val(domain+"?img="+$("#img_url").val());
+        },
+      dataType:'json'
+    });
+
     },
     error: function(xhr, text_status){
              $("#flash").prepend('<div class="alert-message error"><a class="close" href="#">×</a><p><strong>糟糕！</strong>圖片讀取失敗，請確認您輸入的圖片網址。</p></div>');
@@ -132,21 +144,16 @@ function undoDrawOnCanvas() {
   }
 }
 var QueryString = function () {
-  // This function is anonymous, is executed immediately and 
-  // the return value is assigned to QueryString!
   var query_string = {};
   var query = window.location.search.substring(1);
   var vars = query.split("&");
   for (var i=0;i<vars.length;i++) {
     var pair = vars[i].split("=");
-    // If first entry with this name
     if (typeof query_string[pair[0]] === "undefined") {
       query_string[pair[0]] = pair[1];
-      // If second entry with this name
     } else if (typeof query_string[pair[0]] === "string") {
       var arr = [ query_string[pair[0]], pair[1] ];
       query_string[pair[0]] = arr;
-      // If third or later entry with this name
     } else {
       query_string[pair[0]].push(pair[1]);
     }
