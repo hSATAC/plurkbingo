@@ -12,7 +12,7 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap.min.css">
     <style type="text/css">
       /* Override some defaults */
       html, body {
@@ -98,6 +98,7 @@
         <div class="row">
           <div class="span10">
             <h2>Bingo</h2>
+            <div id="flash"></div>
             <canvas id="canvas">
             </canvas>
           </div>
@@ -116,10 +117,21 @@
             </div>
             <div class="clearfix">
               <label>3.我做完了</label>
-              <button type="button" id="save" class="btn primary">轉為圖檔</button>
+              <button type="button" id="save" class="btn primary">上傳</button>
             </div>
             <div class="clearfix">
-              <label>4.右鍵另存圖片</label>
+              <label>4.噗到河道</label>
+              <div class="input">
+                <a href=""><img src="//www.facebook.com/favicon.ico"></a>
+                <a href=""><img src="//twitter.com/favicon.ico"></a>
+                <a href=""><img src="//www.plurk.com/favicon.ico"></a>
+              </div>
+            </div>
+            <div class="clearfix">
+              <label>5.分享給朋友</label>
+              <div class="input">
+                <input class="span3" id="share_url" name="share_url" type="text">
+              </div>
             </div>
             </form>
           </div>
@@ -138,7 +150,8 @@
 
 <script src="js/base64.js" type="text/javascript"></script>
 <script src="js/canvas2image.js" type="text/javascript"></script>
-<script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.js"></script>
+<script src="js/jquery.getimagedata.min.js"></script>
+<script src="http://fgnass.github.com/spin.js/spin.min.js"></script>
 <script src="js/script.js"></script>
   </body>
 </html>
