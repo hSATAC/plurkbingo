@@ -7,17 +7,20 @@ var main_width = 580;
 var scale = 1;
 var restorePoints = [];
 
-img.onload = function(){
-  if(img.width > main_width) {
-    scale = (main_width/img.width);
-    ctx.scale(scale,scale);
-  }
-  can.width = img.width*scale;
-  can.height = img.height*scale;
-  ctx.drawImage(img, 0, 0, img.width*scale, img.height*scale);
-  //saveRestorePoint();
-}
-img.src = 'bingo/88863e539ebf13f390205655b0a294ea.jpg';
+$.getImageData({
+  url: "http://images.plurk.com/e75b675ce666abbbc4d8168e6d70822a.jpg",
+  success: function(img){
+    if(img.width > main_width) {
+      scale = (main_width/img.width);
+      ctx.scale(scale,scale);
+    }
+    can.width = img.width*scale;
+    can.height = img.height*scale;
+    ctx.drawImage(img, 0, 0, img.width*scale, img.height*scale);
+  },
+  error: function(xhr, text_status){
+         }
+});
 
 can.onclick = function(e) {
   saveRestorePoint();
@@ -47,15 +50,15 @@ $("#save").click(function(e){
   can.parentNode.replaceChild(oImg, can);
 });
 function saveRestorePoint() {
-	restorePoints.push(can.toDataURL("image/png"));
+  restorePoints.push(can.toDataURL("image/png"));
 }
 
 function undoDrawOnCanvas() {
-	if (restorePoints.length > 0) {
-		var oImg = new Image();
-		oImg.onload = function() {
-			ctx.drawImage(oImg, 0, 0);
-		}
-		oImg.src = restorePoints.pop();
-	}
+  if (restorePoints.length > 0) {
+    var oImg = new Image();
+    oImg.onload = function() {
+      ctx.drawImage(oImg, 0, 0);
+    }
+    oImg.src = restorePoints.pop();
+  }
 }

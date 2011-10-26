@@ -138,6 +138,7 @@
 
 <script src="js/base64.js" type="text/javascript"></script>
 <script src="js/canvas2image.js" type="text/javascript"></script>
+<script src="https://raw.github.com/betamax/getImageData/master/jquery.getimagedata.js"></script>
 <script src="js/script.js"></script>
   </body>
 </html>
