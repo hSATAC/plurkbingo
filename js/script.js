@@ -62,7 +62,7 @@ $(function() {
     var spinner = new Spinner(opts2).spin(target);
     var opts = {
       success: function(res) {
-                 $("#flash").prepend('<div class="alert-message"><a class="close" href="#">×</a><p><strong>恭喜！</strong>圖片上傳成功，可以分享到您的社群網路嚕。'+res.upload.links.original+'</p></div>');
+                 $("#flash").prepend('<div class="alert-message"><a class="close" href="#">×</a><p><strong>恭喜！</strong><a href="'+res.upload.links.original+'">圖片</a>上傳成功，可以分享到您的社群網路嚕。</p></div>');
                  $(".alert-message").alert()
                    img_uploaded = res.upload.links.original;
                  spinner.stop();
