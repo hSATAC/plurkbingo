@@ -1,3 +1,12 @@
+/*!
+*
+*  Imgur CORS Image upload
+*
+*  Author & Copyright: timdream (timdream@gmail.com; http://timdream.org/)
+*  License: MIT LICENSE  
+*
+*/
+
 "use strict";
 
 (function ($) {
