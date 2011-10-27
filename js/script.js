@@ -10,11 +10,45 @@ var domain = 'http://bingo.hsatac.net/';
 var img_uploaded = '';
 $(function() {
 
-  $(".facebook,.plurk,.twitter,.imgurl").click(function(e){
-    alert('test');
-    e.preventDefault();
+  $("a[rel=twipsy]").twipsy({
+    live: true
+  })
+  $("#modal-close").click(function(){
+    $("#modal").modal('hide');
   });
 
+  $(".twitter").click(function (e){
+    if(img_uploaded != '') {
+      window.open("https://twitter.com/home/?status=噗浪賓果： "+encodeURIComponent(img_uploaded+" 玩這個噗浪賓果："+$("#share_url").val()+" #plurkbingo"));
+    } else {
+      $('#modal').modal('show')
+    }
+    e.preventDefault();
+  });
+  $(".plurk").click(function (e){
+    if(img_uploaded != '') {
+      window.open("https://plurk.com/?status=噗浪賓果： "+encodeURIComponent(img_uploaded+" "+$("#share_url").val()+" (玩這個噗浪賓果)"));
+    } else {
+      $('#modal').modal('show')
+    }
+    e.preventDefault();
+  });
+  $(".facebook").click(function (e){
+    if(img_uploaded != '') {
+      window.open("http://www.facebook.com/dialog/feed?app_id=266143446762054&link="+img_uploaded+"&picture="+img_uploaded+"&name=PlurkBingo&caption=噗浪賓果&description=快來玩噗浪賓果 "+$('#share_url').val()+"&redirect_uri=http://bingo.hsatac.net");
+    } else {
+      $('#modal').modal('show')
+    }
+    e.preventDefault();
+  });
+  $(".imgur").click(function (e){
+    if(img_uploaded != '') {
+      window.open(img_uploaded);
+    } else {
+      $('#modal').modal('show')
+    }
+    e.preventDefault();
+  });
   var img_url = QueryString.img;
   if(typeof(img_url) != 'undefined') {
     $("#img_url").val(img_url);
@@ -78,6 +112,7 @@ $(function() {
                 $("#flash").prepend('<div class="alert-message error"><a class="close" href="#">×</a><p><strong>糟糕！</strong>圖片上傳失敗，請稍後再試一次。</p></div>');
                 $(".alert-message").alert()
                   spinner.stop();
+                  img_uploaded = '';
 
               }
     };
@@ -133,9 +168,11 @@ function init() {
              $(".alert-message").alert()
                $("#share_url").val("");
              spinner.stop();
+             img_uploaded = '';
            }
   });
 };
+
 function saveRestorePoint() {
   restorePoints.push(can.toDataURL("image/png"));
 }

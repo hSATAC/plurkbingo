@@ -124,17 +124,22 @@
             <div class="clearfix">
               <label>4.發表成果</label>
               <div class="input">
-                <a href="#" class="facebook"><img src="//www.facebook.com/favicon.ico"></a>
-                <a href="#" class="twitter"><img src="//twitter.com/favicon.ico"></a>
-                <a href="#" class="plurk"><img src="//www.plurk.com/favicon.ico"></a>
-                <a href="#" class="imgur"><img src="//imgur.com/favicon.ico"></a>
+                <a href="#" class="facebook" rel="twipsy" data-original-title="推到 facebook"><img src="//www.facebook.com/favicon.ico"></a>
+                <a href="#" class="twitter" rel="twipsy" data-original-title="推到 twitter"><img src="//twitter.com/favicon.ico"></a>
+                <a href="#" class="plurk" rel="twipsy" data-original-title="推到 plurk"><img src="//www.plurk.com/favicon.ico"></a>
+                <a href="#" class="imgur" rel="twipsy" data-original-title="打開已上傳的圖片"><img src="//imgur.com/favicon.ico"></a>
               </div>
             </div>
+            <hr>
             <div class="clearfix">
-              <label>5.分享給朋友</label>
+              <label>分享給朋友</label>
               <div class="input">
                 <input class="span3" id="share_url" name="share_url" type="text">
               </div>
+            </div>
+            <div class="clearfix">
+              <label>玩更多賓果</label>
+              <div class="input">想找更多賓果？看看<a href="http://www.plurk.com/p/eewzk6" target="_blank" rel="twipsy" data-original-title="噗浪賓果彙整區">這裡</a>。</div>
             </div>
             </form>
           </div>
@@ -147,11 +152,25 @@
 
     </div> <!-- /container -->
 
+          <div id="modal" class="modal hide fade">
+            <div class="modal-header">
+              <a href="#" class="close">&times;</a>
+              <h3>圖片尚未上傳</h3>
+            </div>
+            <div class="modal-body">
+              <p>請先點選[上傳]後，才能發表成果喔！</p>
+            </div>
+            <div class="modal-footer">
+              <a href="#" id="modal-close" class="btn primary">我知道了</a>
+            </div>
+          </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
+<script src="js/bootstrap-modal.js" type="text/javascript"></script>
 <script src="js/bootstrap-alerts.js" type="text/javascript"></script>
+<script src="js/bootstrap-twipsy.js" type="text/javascript"></script>
 <!--<script src="js/base64.js" type="text/javascript"></script>
 <script src="js/canvas2image.js" type="text/javascript"></script>-->
 <script src="js/jquery.getimagedata.min.js"></script>
