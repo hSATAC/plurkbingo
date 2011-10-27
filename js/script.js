@@ -1,4 +1,5 @@
 var can = document.getElementById('canvas');
+can.onmousedown = function () { return false; }
 var ctx = can.getContext('2d');
 var img = new Image();
 var stamp = new Image();
