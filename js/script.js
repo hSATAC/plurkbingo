@@ -9,6 +9,12 @@ var restorePoints = [];
 var domain = 'http://bingo.hsatac.net/';
 var img_uploaded = '';
 $(function() {
+
+  $(".facebook,.plurk,.twitter,.imgurl").click(function(e){
+    alert('test');
+    e.preventDefault();
+  });
+
   var img_url = QueryString.img;
   if(typeof(img_url) != 'undefined') {
     $("#img_url").val(img_url);
@@ -109,24 +115,24 @@ function init() {
       spinner.stop();
       $(".alert-message").remove();
 
-    $.ajax({
+      $.ajax({
         url:"http://api.bit.ly/v3/shorten",
         data:{longUrl:domain+"?img="+$('#img_url').val(),apiKey:'R_ce09d5cc110aaefec88fac016517b561',login:'hsatac'},
         success:function(v) {
           $("#share_url").val(v.data.url);
         },
         error: function(){
-          $("#share_url").val(domain+"?img="+$("#img_url").val());
-        },
-      dataType:'json'
-    });
+                 $("#share_url").val(domain+"?img="+$("#img_url").val());
+               },
+        dataType:'json'
+      });
 
     },
     error: function(xhr, text_status){
              $("#flash").prepend('<div class="alert-message error"><a class="close" href="#">×</a><p><strong>糟糕！</strong>圖片讀取失敗，請確認您輸入的圖片網址。</p></div>');
              $(".alert-message").alert()
-    $("#share_url").val("");
-  spinner.stop();
+               $("#share_url").val("");
+             spinner.stop();
            }
   });
 };
