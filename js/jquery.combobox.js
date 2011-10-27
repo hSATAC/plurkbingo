@@ -115,7 +115,7 @@
         this.selectorElement = jQuery(
             '<div class="combobox_selector" '+
             'style="display:none; width:'+selectorWidth+
-            'px; position:absolute; left: 0; top: '+selectorTop+'px;"'+
+            'px; height: 350px;position:absolute; left: 0; top: '+selectorTop+'px;overflow-x:auto;overflow-y: scroll;"'+
             '></div>'
         ).insertAfter(this.combobox.textInputElement);
         var thisSelector = this;
