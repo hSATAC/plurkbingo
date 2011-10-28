@@ -12,10 +12,11 @@
  */
 (function () {
 
-    jQuery.fn.combobox = function (selectOptions, selectOptions2) {
+    jQuery.fn.combobox = function (selectOptions, selectValues) {
+
     
         return this.each(function () {
-            var newCombobox = new Combobox(this, selectOptions, selectOptions2);
+            var newCombobox = new Combobox(this, selectOptions, selectValues);
             jQuery.combobox.instances.push(newCombobox);
         });
     
@@ -26,14 +27,14 @@
     };
 
 
-    var Combobox = function (textInputElement, selectOptions, selectOptions2) {
+    var Combobox = function (textInputElement, selectOptions, selectValues) {
         this.textInputElement = jQuery(textInputElement);
         var container = this.textInputElement.wrap(
             '<span class="combobox" style="position:relative; '+
             'display:-moz-inline-box; display:inline-block;"/>'
         );
         this.selector = new ComboboxSelector(this);
-        this.setSelectOptions(selectOptions, selectOptions2);
+        this.setSelectOptions(selectOptions, selectValues);
         var inputHeight = this.textInputElement.outerHeight();
         var buttonLeftPosition = this.textInputElement.outerWidth() + 0;
         var showSelectorButton = jQuery(
@@ -55,8 +56,9 @@
 
     Combobox.prototype = {
 
-        setSelectOptions : function (selectOptions, selectOptions2) {
-            this.selector.setSelectOptions(selectOptions, selectOptions2);
+        setSelectOptions : function (selectOptions, selectValues) {
+            if(typeof(selectValues) == 'undefined') selectValues = selectOptions;
+            this.selector.setSelectOptions(selectOptions, selectValues);
             this.selector.buildSelectOptionList(this.getValue());
         },
 
@@ -109,13 +111,13 @@
         this.optionCount = 0;
         this.selectedIndex = -1;
         this.allSelectOptions = [];
-        this.allSelectOptions2 = [];
+        this.allSelectValues = [];
         var selectorTop = combobox.textInputElement.outerHeight();
         var selectorWidth = combobox.textInputElement.outerWidth();
         this.selectorElement = jQuery(
             '<div class="combobox_selector" '+
-            'style="display:none; width:'+selectorWidth+
-            'px; height: 350px;position:absolute; left: 0; top: '+selectorTop+'px;overflow-x:auto;overflow-y: scroll;"'+
+            'style="display:none; width:'+(selectorWidth+18)+
+            'px; max-height: 350px;position:absolute; left: 0; top: '+selectorTop+'px;overflow-x:auto;overflow-y: auto;"'+
             '></div>'
         ).insertAfter(this.combobox.textInputElement);
         var thisSelector = this;
@@ -143,9 +145,9 @@
 
     ComboboxSelector.prototype = {
 
-        setSelectOptions : function (selectOptions, selectOptions2) {
+        setSelectOptions : function (selectOptions, selectValues) {
             this.allSelectOptions = selectOptions;
-            this.allSelectOptions2 = selectOptions2;
+            this.allSelectValues = selectValues;
         },
 
         buildSelectOptionList : function (startingLetters) {
@@ -166,7 +168,7 @@
             this.optionCount = selectOptions.length;
             var ulElement = jQuery('<ul></ul>').appendTo(this.selectorElement);
             for (var i = 0; i < selectOptions.length; i++) {
-                ulElement.append('<li data="'+this.allSelectOptions2[i]+'">'+selectOptions[i]+'</li>');
+                ulElement.append('<li data="'+this.allSelectValues[i]+'">'+selectOptions[i]+'</li>');
             }
             var thisSelector = this;
             this.selectorElement.find('li').click(function (e) {
