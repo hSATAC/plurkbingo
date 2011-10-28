@@ -9,6 +9,8 @@
  * Date: 2011-07-21
  *
  * modified by hSATAC(Ash Wu)
+ *
+ * https://github.com/hSATAC/Combo-Box-jQuery-Plugin
  */
 (function () {
 
